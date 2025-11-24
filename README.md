@@ -9,7 +9,8 @@
 <img alt="Docker" src="https://img.shields.io/badge/deploy-docker-blue">
 <img alt="LLM Frontend" src="https://img.shields.io/badge/Open_WebUI-enabled-purple">
 <img alt="Status" src="https://img.shields.io/badge/status-open--core-brightgreen">
-</p><img width="1029" height="270" alt="image" src="https://github.com/user-attachments/assets/346dd9b0-d4c9-48bf-b641-b6edb1500a6a" />
+<img width="1029" height="270" alt="image" src="https://github.com/user-attachments/assets/346dd9b0-d4c9-48bf-b641-b6edb1500a6a" />
+</p>
     
 # AIMusubi – Local-First Agentic NetOps Framework
 
