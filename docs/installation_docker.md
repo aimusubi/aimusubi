@@ -85,13 +85,16 @@ It will generate:
 
 ---
 
-# 6. Start the Stack
+### Bring the stack up (only needed if restarting later)
 
+The bootstrap automatically starts the entire stack.  
+If you reboot or want to restart the services:
+
+# 6. Start the Stack
 ```bash
 cd ~/aimusubi-stack
 docker compose up -d
 ```
-
 Check container status:
 
 ```bash
