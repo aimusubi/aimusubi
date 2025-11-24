@@ -1,73 +1,179 @@
-# Roadmap
+# AIMusubi – Roadmap (v1.0 → v2.x and Beyond)
 
-This roadmap outlines the planned evolution of AIMusubi.
+This roadmap outlines the evolution of AIMusubi from the current **v1.0 open-core**
+release into future lab, team, and enterprise editions.  
+It provides transparent expectations for features, stability, vendor expansion,
+and architecture improvements.
+
+AIMusubi starts as a **lab-first, local-first, agentic framework** —
+simple by design, powerful in potential.
 
 ---
 
-## v1.x – Open-Core Lab Framework (Current Phase)
+# 1. Current Stage (v1.0) – Open-Core Lab Framework
 
-**Focus:**
+### Goals Achieved
+- Full-stack bootstrap (bare-metal + Docker)
+- AIMusubi API with standardized intent engine
+- Adapters for Cisco IOS-XE, Arista EOS, VyOS
+- Unified intent model (`iface.list`, `routing.v4.rib`, `ospf.neigh`, etc.)
+- Open WebUI integration (tool-calling)
+- Prometheus + Grafana integration
+- SQLite memory/state (observations, credentials, metadata)
+- SNMP trap receiver + OPA (foundational)
+- Documentation suite
 
-- Solidify the core
-- Support 2–3 vendors well
-- Improve documentation and examples
+### Focus Areas
+- Reliability in lab environments  
+- Simplicity for new users  
+- Clean architecture and transparency  
+- Reproducible deployment through bootstraps  
 
-**Planned:**
+---
 
-- More robust error reporting in API
-- More detailed interface and routing models
+# 2. v1.1 – v1.4 (Short-Term Enhancements)
+
+These improvements refine the open-core experience without expanding scope too quickly.
+
+### Planned Enhancements
+- More robust adapter error handling
+- More detailed interface parsing (e.g., counters, duplex, speed)
 - Additional intents:
-  - BGP summaries
-  - Interface counters (unicast, errors, drops)
-- More Grafana panels (intent latency, vendor breakdowns, error rates)
-- Better adapter configuration UX
+  - IPv6 routing (`routing.v6.rib`)
+  - BGP summary (`bgp.summary`)
+  - Interface statistics (`iface.counters`)
+- Stronger adapter autodetection
+- Prometheus metrics expansion:
+  - Intent latency histograms per vendor
+  - Adapter error counters
+- More Grafana dashboards:
+  - Device reachability
+  - LLM → API tool-call metrics
+  - Per-vendor success ratio
+
+### Developer Improvements
+- Better logging hooks
+- Cleaner adapter registry
+- Simplified device configuration templates
 
 ---
 
-## v2.x – Advanced Lab + Team Use
+# 3. v2.x – Advanced Lab + Team Edition
 
-**Focus:**
+This stage introduces multi-device workflows and collaboration features.
 
-- Small teams and serious homelabs
-- More guardrails and governance
+### Key Features
+- Policy execution via OPA (intent validation)
+- Event-driven triggers using SNMP traps
+- AIMusubi "Playbooks":
+  - Multi-step workflows
+  - Example: interface flap → diagnose → run OSPF/RIB summary
+- Role-based workspaces in Open WebUI
+- Snapshot/restore of AIMusubi state
+- Smoother adapter configuration via YAML manifests
+- More robust error semantics for LLMs
 
-**Ideas:**
-
-- Role-based “profiles” for different workspaces
-- Stronger policy integration with OPA
-- Snapshot / restore of AIMusubi state
-- Enhanced event handling via SNMP and webhooks
-- Pluggable “playbooks” for common workflows
-
----
-
-## Enterprise Direction (Conceptual)
-
-Longer term, the “enterprise tier” could introduce:
-
-- RBAC and multi-tenant controls
-- Clustered AIMusubi API instances
-- Central topology and service graph
-- Integration with ITSM / ticketing systems
-- FinOps and cloud cost correlation
-- SLA tracking and service-health scoring
-
-The open-core project will remain focused on:
-
-- Labs
-- Local-first operation
-- Transparency
-- Extensibility
+### Collaborator Support
+- Shared device profiles
+- Shared credentials vault (encrypted)
+- Multi-user access in a homelab or small team
 
 ---
 
-## Community Input
+# 4. Enterprise Direction (Long-Term Vision)
 
-If you use AIMusubi and have ideas for:
+These features are **not** targeted for open-core, but for a future enterprise tier.
 
-- New intents
-- New vendors
-- Better observability
-- Safer agent behaviors
+### Enterprise-Level Capabilities
+- RBAC (role-based access control)
+- Topology engine:
+  - L2/L3 discovery
+  - Service graph
+  - Path mapping
+- Clustered AIMusubi API nodes
+- High availability (HA)
+- Audit logging + event correlation
+- FinOps + cost telemetry (cloud + L2 overlays)
+- Production-grade credential vaulting
+- Multi-tenant isolation
+- Ticketing/ITSM system integration
+- Automated configuration remediation loops
 
-…please open an issue or discussion and share your thoughts.
+### Why Enterprise?
+To maintain:
+- A clean open-core project for experimentation  
+- A sustainable business model for long-term development  
+- A clear separation of concerns (education vs production automation)
+
+---
+
+# 5. Vendor Expansion
+
+Future releases may expand adapters to support:
+
+- Juniper (NETCONF/REST)
+- Fortinet (REST API)
+- Palo Alto PAN-OS
+- Cumulus Linux
+- Linux hosts via `ip`/FRR APIs
+- Cloud VNFs (AWS, GCP, Azure virtual routers)
+
+Adapters will adopt a plug-in architecture to make this process easier.
+
+---
+
+# 6. Documentation + Community
+
+### Documentation Enhancements
+- Architecture deep dive
+- Adapter development guide
+- Intent development guide
+- Troubleshooting playbook
+- Contributor onboarding
+
+### Community Features
+- Examples directory (playbooks, scenarios)
+- Reference labs
+- Video walkthroughs
+- Discussion boards
+
+---
+
+# 7. Philosophy and Guiding Principles
+
+AIMusubi follows a few key principles:
+
+### **Transparency over abstraction**
+Every step should be inspectable and human-understandable.
+
+### **Local-first**
+Your lab, your hardware, your API — no cloud required.
+
+### **Vendor-agnostic behavior**
+Adapters normalize vendor-specific quirks.
+
+### **Agentic but controlled**
+LLMs do not guess — AIMusubi enforces reality via tools.
+
+### **Open-core, community-driven**
+Encourages experimentation and contribution.
+
+---
+
+# 8. Summary
+
+AIMusubi’s roadmap balances:
+
+- A stable, transparent open-core foundation  
+- Real vendor support  
+- A growing intent catalog  
+- A path toward automation and agentic behavior  
+- A long-term enterprise vision  
+
+The project moves deliberately — focusing first on clarity, reliability, and
+educational value before scaling into heavy enterprise features.
+
+For active development details:
+
+👉 Follow updates in the GitHub repo  
+👉 Contribute via issues and PRs  
