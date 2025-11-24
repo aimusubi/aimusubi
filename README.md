@@ -1,17 +1,4 @@
-<p align="center">
-<a href="https://github.com/aimusubi/aimusubi/blob/main/LICENSE">
-<img alt="License" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg">
-</a>
-<a href="https://github.com/aimusubi/aimusubi/releases">
-<img alt="Release" src="https://img.shields.io/badge/version-1.0.0-green">
-</a>
-<img alt="Platform" src="https://img.shields.io/badge/platform-Ubuntu_22.04/24.04-orange">
-<img alt="Docker" src="https://img.shields.io/badge/deploy-docker-blue">
-<img alt="LLM Frontend" src="https://img.shields.io/badge/Open_WebUI-enabled-purple">
-<img alt="Status" src="https://img.shields.io/badge/status-open--core-brightgreen">
-<img width="1029" height="270" alt="image" src="https://github.com/user-attachments/assets/346dd9b0-d4c9-48bf-b641-b6edb1500a6a" />
-</p>
-    
+   
 # AIMusubi – Local-First Agentic NetOps Framework
 
 AIMusubi is a **local-first agentic automation framework** that brings LLM-driven
