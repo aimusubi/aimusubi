@@ -43,7 +43,7 @@ AIMusubi installs an entire **Level-5 agentic NetOps stack**:
 - **LLM Frontend**
   - Open WebUI wired directly to AIMusubi’s OpenAPI schema
 
-> **AIMusubi includes a full operator-grade toolchain (nmap, masscan, fping, SNMP utilities, DNS tools, traceroute, iproute2, etc.) so your environment has the same diagnostic visibility as a real NetOps workflow. Please use carefully and in a lab only**
+> **AIMusubi includes a full operator-grade toolchain (nmap, masscan, fping, SNMP utilities, DNS tools, traceroute, iproute2, etc.) so your environment has the same diagnostic visibility as a real NetOps workflow. Please use carefully and in a lab environment only**
 
 All installed and wired together via **bare-metal** or **Docker** bootstrap.
 
