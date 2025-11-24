@@ -48,7 +48,7 @@ This script installs the **entire AIMusubi stack**:
 - Open WebUI
 - Ollama + `llama3` model
 - SNMP trap receiver
-- Netops operator toolchain
+- NetOps operator toolchain
 - OPA (policy engine foundation)
 - Systemd services for all components
 - Required Python environment + dependencies
