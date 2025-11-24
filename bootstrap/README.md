@@ -2,7 +2,7 @@
 **Version: 1.0**  
 **Release Date: 2025-11-23**
 
-AIMusubi is a **local-first, full-stack agentic automation framework** designed for real network engineering labs. It connects an LLM to *actual* network devices — Cisco IOS-XE, Arista EOS, and VyOS — through a unified intent API, backed by observability, memory, and a reproducible bootstrap system.
+AIMusubi is a **local-first** agentic NetOps **framework** that becomes a full **platform** when bootstrapped with its open-core stack.. It connects an LLM to *actual* network devices — Cisco IOS-XE, Arista EOS, and VyOS — through a unified intent API, backed by observability, memory, and a reproducible bootstrap system.
 
 AIMusubi is open-core, transparent, and built for engineers who want to **experiment, learn, and build** agentic operations from the ground up.
 
