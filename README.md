@@ -1,9 +1,3 @@
-    ___    _                 _     _     _ 
-   / _ \  (_)  _ __    ___  | |_  (_) __| |
-  / /_)/  | | | '_ \  / _ \ | __| | |/ _` |
- / ___/   | | | | | || (_) || |_  | | (_| |
- \/       |_| |_| |_| \___/  \__| |_|\__,_|
-
               Local-First Agentic NetOps Framework
 
 # AIMusubi – Local-First Agentic NetOps Framework
