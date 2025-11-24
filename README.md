@@ -1,6 +1,6 @@
 # AIMusubi – Local-First Agentic NetOps Framework
 
-**AIMusubi** is a local-first, full-stack agentic automation framework for real network labs.  
+**AIMusubi** is a local-first agentic NetOps framework that becomes a full platform when bootstrapped with its open-core stack.
 It connects an LLM to **actual devices** – Cisco IOS-XE, Arista EOS, and VyOS – through a unified intent API, backed by observability, memory, and a reproducible bootstrap.
 
 > If you want to see an LLM *observe, decide, and act* on real routers in your own lab – this is for you.
