@@ -51,7 +51,11 @@ AIMusubi integrates natively with **Open WebUI**, giving you:
 
 ### ✔ **SNMP + Policy Foundation**
 - SNMP trap handler → logs into `logs/snmptraps.log`  
-- OPA running for future policy enforcement  
+- OPA running for future policy enforcement
+
+### ✔ **NetOps Toolchain**
+- nmap, masscan, fping, SNMP utilities, DNS tools, traceroute, iproute2, etc  
+- Accessible workflow on request via the LLM  
 
 ### ✔ **Bare-Metal or Docker Deployment**
 Both are fully supported through one-command bootstraps.
