@@ -96,7 +96,8 @@ What this script installs:
 - Ollama + llama3  
 - AIMusubi API (FastAPI)  
 - Adapters (Cisco / Arista / VyOS)  
-- SNMP trap agent  
+- SNMP trap agent
+- Netops Toolschain 
 - OPA  
 - Systemd services  
 
