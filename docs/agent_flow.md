@@ -1,104 +1,289 @@
-# Agent Flow
+# AIMusubi – Agent Flow Guide
 
-This document explains how AIMusubi ties together:
+This document explains the **end-to-end flow** of how AIMusubi processes  
+an LLM request, executes an intent, interacts with a real network device,  
+and returns structured data back to the LLM.
 
-- User / LLM prompts
-- Tool calls
-- AIMusubi API
-- Adapters
-- Devices
-- Observability
+This helps users understand how AIMusubi operates internally and how  
+each component fits into the automation pipeline.
 
 ---
 
-## High-Level Flow
+# 1. High-Level Architecture
 
-1. **User Prompt**  
-   You type into Open WebUI:
+The overall path of a request:
 
-   > "Use AIMusubi to list all interfaces on `router1`."
+```
+User Prompt → LLM Reasoning → Open WebUI Tool Call → AIMusubi API
+            → Adapter Logic → Device API (RESTCONF/eAPI/REST)
+            → AIMusubi API → LLM → User Response
+```
 
-2. **LLM Reasoning**  
-   The LLM decides to call the AIMusubi tool with intent `iface.list` for `router1`.
+AIMusubi also feeds logs and metrics into:
 
-3. **Tool Call (Open WebUI → AIMusubi)**  
-   Open WebUI sends a tool request to the AIMusubi API (via `/openapi.json` schema).
-
-4. **API Routing**  
-   AIMusubi:
-   - Validates the request
-   - Locates the adapter for the target device’s vendor
-   - Calls the appropriate adapter function
-
-5. **Adapter → Device**  
-   The adapter:
-   - Builds RESTCONF/eAPI/REST calls
-   - Sends them to the device (e.g., `router1.lab.local`)
-   - Parses the device response
-   - Normalizes data into AIMusubi’s models
-
-6. **API Response**  
-   AIMusubi returns structured JSON back to Open WebUI.
-
-7. **LLM Interpretation**  
-   The LLM reads the JSON and responds in natural language, e.g.:
-
-   > "On router1, GigabitEthernet2 is admin-down; all other interfaces are up."
-
-8. **Metrics + Logs**  
-   Simultaneously:
-   - AIMusubi exposes metrics (latency, success/failure, counts) to Prometheus.
-   - Logs activity (including errors) to its log output.
-
-Grafana visualizes the metrics in near real time.
+- **Prometheus**
+- **Grafana**
+- Local SQLite memory state
 
 ---
 
-## Read-Only vs. Configuration Actions
+# 2. Step-by-Step Agent Flow
 
-There are two conceptual paths:
-
-1. **Read-only path** (safe):
-   - `iface.list`
-   - `routing.v4.rib`
-   - `ospf.neigh`
-   - `cpu.util`
-   - etc.
-
-2. **Configuration path** (risky):
-   - `iface.admin-up`
-   - `iface.admin-down`
-   - Future “set” / “update” intents
-
-In most lab setups, you should start with **read-only only**, keep logs open, and only later experiment with config intents under strict control.
+Below is the detailed flow from the moment a user types a prompt.
 
 ---
 
-## Error Handling
+## Step 1 – User Prompts the LLM
 
-If something fails, you might see:
+Example:
 
-- Device unreachable
-- Auth failure
-- Schema/intent mismatch
-- Adapter errors
+> “Use AIMusubi to run `iface.list` on router1.”
 
-These surface as:
-
-- API responses with error fields
-- Logs in `journalctl` or Docker logs
-- Metrics increments in Prometheus
-
-This is by design – AIMusubi is meant to make failure **visible**, not invisible.
+The prompt is processed inside **Open WebUI** using the configured model  
+(local Ollama or external provider).
 
 ---
 
-## Why This Matters
+## Step 2 – LLM Decides to Call a Tool
 
-The goal of AIMusubi is not to hide complexity; it is to:
+If your system prompt is configured correctly, the LLM will:
 
-- Make every step of the pipeline visible
-- Give you control over each layer
-- Let you experiment with agentic behavior **on your own infrastructure**
+- Recognize the request involves a network device
+- Decide to use the AIMusubi tool
+- Identify the correct intent (`iface.list`)
+- Build a tool call based on the OpenAPI schema
 
-For a quick refresher on what AIMusubi provides, see [Overview](overview.md).
+Example internal tool call (conceptual):
+
+```json
+{
+  "tool": "AIMusubi API",
+  "operation": "iface.list",
+  "params": { "host": "router1.lab.local" }
+}
+```
+
+---
+
+## Step 3 – Open WebUI Sends Tool Call to AIMusubi API
+
+Open WebUI uses the `/openapi.json` spec to generate  
+a valid HTTP POST request to the AIMusubi API.
+
+Example:
+
+```
+POST http://127.0.0.1:5055/intent/exec
+```
+
+Payload:
+
+```json
+{
+  "intent": "iface.list",
+  "params": { "host": "router1.lab.local" }
+}
+```
+
+Open WebUI shows the tool call in the chat UI.
+
+---
+
+## Step 4 – AIMusubi API Routes Intent
+
+The AIMusubi API:
+
+1. Validates the intent exists
+2. Validates parameters
+3. Identifies the vendor associated with the host
+4. Selects the correct adapter:
+   - Cisco RESTCONF
+   - Arista eAPI
+   - VyOS REST
+5. Calls the adapter’s internal handler
+
+---
+
+## Step 5 – Adapter Executes Device API Calls
+
+Each adapter:
+
+- Builds the correct HTTPS request(s)
+- Adds credentials
+- Sends the request to the device
+- Receives JSON/XML/YANG output
+- Normalizes the data into AIMusubi’s standard structures
+
+Example Cisco RESTCONF call (conceptual):
+
+```
+GET https://router1.lab.local/restconf/data/ietf-interfaces:interfaces/interface
+```
+
+Example Arista eAPI call (conceptual):
+
+```
+JSON-RPC → runCmds(["show ip interface brief"])
+```
+
+Example VyOS REST call:
+
+```
+GET https://edge1.lab.local/interfaces
+```
+
+If device errors occur:
+
+- AIMusubi logs them
+- The adapter returns a structured error back to API
+- LLM receives meaningful error context
+
+---
+
+## Step 6 – AIMusubi API Returns Normalized JSON
+
+AIMusubi returns a clean, vendor-agnostic JSON response:
+
+```json
+{
+  "result": [
+    {
+      "name": "GigabitEthernet1",
+      "admin_status": "up",
+      "oper_status": "up",
+      "ipv4": "10.1.1.1/24"
+    }
+  ]
+}
+```
+
+This is one of the major benefits of AIMusubi:
+
+✔ Unified data model  
+✔ Identical schema across all vendors  
+✔ LLM-friendly structures  
+✔ Rich telemetry and logs  
+
+---
+
+## Step 7 – LLM Interprets Device Data
+
+The LLM receives the JSON and produces a human-readable explanation.
+
+Example:
+
+> “On router1, all interfaces are up except GigabitEthernet2,  
+> which is admin-down. The IPv4 address of Gi1 is 10.1.1.1/24.”
+
+Properly instructed (via system prompt), the LLM will:
+
+- Never invent interface names
+- Never guess statuses
+- Only summarize returned JSON
+- Offer recommendations based on actual device state
+
+---
+
+## Step 8 – Metrics and Logs Update
+
+While the request flows:
+
+### Logs  
+AIMusubi records:
+
+- Intent execution  
+- Device API calls  
+- Errors  
+- Latency  
+- Adapter selection  
+
+Bare-metal:
+```bash
+sudo journalctl -u aimusubi-api -f
+```
+
+Docker:
+```bash
+docker compose logs -f aimusubi-api
+```
+
+### Prometheus Metrics  
+Prometheus scrapes metrics such as:
+
+- `aimusubi_intent_success_total`
+- `aimusubi_intent_failure_total`
+- `aimusubi_adapter_latency_seconds`
+- `aimusubi_api_requests_total`
+
+Grafana dashboards then visualize:
+
+- Intent success/failure trends  
+- Per-vendor latency  
+- Success ratio  
+- API behavior over time  
+
+---
+
+# 3. How AIMusubi Avoids Hallucinations
+
+Hallucination prevention is built on three layers:
+
+### **Layer 1 – Tool Enforcement**  
+Strong system prompts instruct LLM to always call AIMusubi for device data.
+
+### **Layer 2 – Ground Truth JSON**  
+Adapters return **real device state** — no synthetic values.
+
+### **Layer 3 – Observability**  
+Logs and metrics allow verification that every intent was actually executed.
+
+---
+
+# 4. Errors and Recovery
+
+### Example: Device unreachable
+
+API returns:
+
+```json
+{
+  "error": "Device unreachable at router1.lab.local"
+}
+```
+
+LLM explains:
+
+> “AIMusubi could not reach router1.lab.local over HTTPS.  
+> Check IP, routing, or device API configuration.”
+
+### Example: Unsupported endpoint
+
+API returns:
+
+```json
+{
+  "error": "RESTCONF endpoint not supported on this device"
+}
+```
+
+Adapter automatically flags vendor limitations.
+
+### Example: Credential problems
+
+Use `/device/list` and `/device/credentials` to confirm proper configuration.
+
+---
+
+# 5. Summary
+
+The AIMusubi agent flow provides:
+
+- A clean division between LLM reasoning and device interaction  
+- A consistent, predictable structure for automation  
+- Real network state instead of hallucinated output  
+- Strong observability and debug tools  
+- An extensible architecture for new intents and vendors  
+
+For deeper understanding of specific intents:
+
+👉 `intents_reference.md`  
