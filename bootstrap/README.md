@@ -97,7 +97,7 @@ What this script installs:
 - AIMusubi API (FastAPI)  
 - Adapters (Cisco / Arista / VyOS)  
 - SNMP trap agent
-- Netops Toolschain 
+- NetOps Toolschain 
 - OPA  
 - Systemd services  
 
