@@ -46,7 +46,7 @@ All installed and wired together via **bare‑metal** or **Docker** bootstrap.
 
 ---
 
-## 🚀 Three‑Minute Quickstart
+## 🚀 Five‑Minute Quickstart
 
 > Full installation details live in `docs/`, but here’s the shortest path.
 
