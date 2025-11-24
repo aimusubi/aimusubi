@@ -1,5 +1,4 @@
-              Local-First Agentic NetOps Framework
-
+     
 # AIMusubi – Local-First Agentic NetOps Framework
 
 AIMusubi is a **local-first agentic automation framework** that brings LLM-driven
