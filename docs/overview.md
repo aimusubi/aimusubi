@@ -40,6 +40,7 @@ AIMusubi installs an entire stack:
   - OPA ready for future intent/policy checks
   - SNMP trap receiver for lab event capture
 
+> **AIMusubi also includes real NetOps operator tools (nmap, masscan, fping, SNMP utilities, DNS tools, traceroute, iproute2, etc.) to ensure your lab behaves like a realistic operational network environment.**
 ---
 
 ## Typical Lab Flow
