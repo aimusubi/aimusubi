@@ -55,7 +55,8 @@ AIMusubi integrates natively with **Open WebUI**, giving you:
 
 ### ✔ **NetOps Toolchain**
 - nmap, masscan, fping, SNMP utilities, DNS tools, traceroute, iproute2, etc  
-- Accessible workflow on request via the LLM  
+- Accessible workflow on request via the LLM
+- Plesae use carefully and in a lab environment only
 
 ### ✔ **Bare-Metal or Docker Deployment**
 Both are fully supported through one-command bootstraps.
