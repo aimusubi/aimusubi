@@ -66,6 +66,8 @@ To minimize this:
 - Keep API logs open when testing  
 - Confirm tool calls appear in the chat UI  
 
+---
+
 ## **Why doesn't AiMusubi know what to do immediately?**
 Think of AiMusubi as a teenager; a very jr network engineer.
 
