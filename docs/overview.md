@@ -74,6 +74,7 @@ AIMusubi is built for:
 - Homelab builders who want a **local-first agentic stack**
 - SRE / DevOps / NetDevOps engineers exploring **intent-based operations**
 - Anyone curious how to move from “LLM in a browser” to “LLM controlling infrastructure (safely)”
+- IT Operators who are attempting to understand strategies using AI and Natural Language operations
 
 It is **not**:
 
