@@ -66,6 +66,13 @@ To minimize this:
 - Keep API logs open when testing  
 - Confirm tool calls appear in the chat UI  
 
+## **Why doesn't AiMusubi know what to do immediately?**
+Think of AiMusubi as a teenager; a very jr network engineer.
+
+- It requires technical and behavior training 
+- AiMusubi responds to reinforcement (positive and negative)
+- Scenario based training is beneficial for its learning
+- Do not get frustrated with AiMusubi.  Be patient with it. It learns over time.
 ---
 
 ## **What devices are supported?**
