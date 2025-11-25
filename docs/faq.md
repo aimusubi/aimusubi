@@ -68,7 +68,7 @@ To minimize this:
 
 ---
 
-## **Why doesn't AiMusubi know what to do immediately?**
+## **Why doesn't AIMusubi know what to do immediately?**
 Think of AiMusubi as a teenager; a very jr network engineer.
 
 - It requires technical and behavior training 
