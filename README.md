@@ -103,7 +103,7 @@ AIMusubi is a **lab-first framework**, not a production change control system.
 - **Version:** 1.0.0 (Open-Core Lab Release)  
 - **Vendors:** Cisco IOS-XE, Arista EOS, VyOS  
 - **OS Target:** Ubuntu (bare-metal) + Docker stack  
-- **Security Model:** Local lab mode, self-signed certs accepted  
+- **Security Model:** Local lab mode, self-signed certs accepted, http used for analysis  
 
 See:
 
