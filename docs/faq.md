@@ -18,6 +18,7 @@ It is designed for:
 - Experimentation
 - Agentic research
 - Early-stage NetOps automation
+- Forward thinking IT strategy development
 
 Not for production use (yet).
 
