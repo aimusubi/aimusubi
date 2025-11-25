@@ -270,6 +270,7 @@ See:
 
 This project represents hundreds of hours of hands-on work with real network devices and LLM experimentation. If AIMusubi helps you learn, build, or think differently — that’s the mission.
 
+---
 ## Software Licensing Notice
 
 AIMusubi communicates with network operating systems exclusively through
