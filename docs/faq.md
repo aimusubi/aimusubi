@@ -72,7 +72,7 @@ To minimize this:
 Think of AiMusubi as a teenager; a very jr network engineer.
 
 - It requires technical and behavior training 
-- AiMusubi responds to reinforcement (positive and negative)
+- AiMusubi responds to reinforcement (positive and constructive)
 - Scenario based training is beneficial for its learning
 - Do not get frustrated with AiMusubi.  Be patient with it. It learns over time.
 ---
