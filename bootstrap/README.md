@@ -270,3 +270,17 @@ See:
 
 This project represents hundreds of hours of hands-on work with real network devices and LLM experimentation. If AIMusubi helps you learn, build, or think differently — that’s the mission.
 
+## Software Licensing Notice
+
+AIMusubi communicates with network operating systems exclusively through
+standards-based or publicly documented APIs. No proprietary software, firmware,
+or intellectual property from any vendor is included in this repository.
+
+Users must supply their own properly licensed network operating system images in
+accordance with the terms of their vendor agreements. AIMusubi does not provide,
+store, transmit, or facilitate access to any vendor images.
+
+All vendor names and trademarks remain the exclusive property of their respective
+owners. AIMusubi is an independent open-source project and has no affiliation with
+Cisco, Arista, VyOS, or any other vendor referenced in examples or documentation.
+
