@@ -93,6 +93,7 @@ Then open Open WebUI, select your LLM, and AIMusubi is ready for tool-calling.
 - **Homelab builders** running multi-vendor topologies  
 - **SRE / DevOps engineers** curious about agentic workflows  
 - **Educators & students** learning real infrastructure automation  
+- **IT Operators** Exploring the forward understanding of natural language operations
 
 AIMusubi is a **lab-first framework**, not a production change control system.
 
